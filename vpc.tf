@@ -151,6 +151,7 @@ data "template_file" "worker_user_data" {
     controller_ips     = join(" ", local.controller_ips)
     storage_ips    = join(" ", local.storage_ips)
     hyperthreading = var.hyperthreading_enabled
+    sshkey_id                     = data.ibm_is_ssh_key.ssh_key[local.ssh_key_list[0]].id
     temp_public_key               = local.vsi_login_temp_public_key
     scale_mount_point             = var.scale_compute_cluster_filesystem_mountpoint
     spectrum_scale                = var.spectrum_scale_enabled
