@@ -38,6 +38,8 @@ host_prefix=$(hostname|cut -f1-4 -d -)
 # Change the MTU setting as this is required for setting mtu as 9000 for communication to happen between clusters
 ip route replace $rc_cidr_block  dev eth0 proto kernel scope link src $privateIP mtu 9000
 echo 'ip route replace '$rc_cidr_block' dev eth0 proto kernel scope link src '$privateIP' mtu 9000' >> /etc/sysconfig/network-scripts/route-eth0
+echo "MTU=9000" >> "/etc/sysconfig/network-scripts/ifcfg-eth0"
+systemctl restart NetworkManager
 
 #for controllerIP in $controller_ips; do
   #if [ "$controllerIP" != "$privateIP" ]; then
