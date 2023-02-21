@@ -41,6 +41,8 @@ ln -s /mnt/$nfs_mount_dir /root/shared
 # Change the MTU setting as this is required for setting mtu as 9000 for communication to happen between clusters
 ip route replace $rc_cidr_block  dev eth0 proto kernel scope link src $privateIP mtu 9000
 echo 'ip route replace '$rc_cidr_block' dev eth0 proto kernel scope link src '$privateIP' mtu 9000' >> /etc/sysconfig/network-scripts/route-eth0
+echo "MTU=9000" >> "/etc/sysconfig/network-scripts/ifcfg-eth0"
+systemctl restart NetworkManager
 
 mkdir -p /root/.ssh
 cat /mnt/$nfs_mount_dir/ssh/id_rsa.pub >> /root/.ssh/authorized_keys
