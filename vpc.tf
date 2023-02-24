@@ -124,7 +124,7 @@ data "template_file" "controller_user_data" {
     image_id                      = local.image_mapping_entry_found? local.new_image_id :data.ibm_is_image.image[0].id
     subnet_id                     = ibm_is_subnet.subnet.id
     security_group_id             = ibm_is_security_group.sg.id
-    sshkey_id                     = data.ibm_is_ssh_key.ssh_key[join(",", local.ssh_key_list)].id
+    sshkey_id                     = data.ibm_is_ssh_key.ssh_key[local.ssh_key_id_list].id
     region_name                   = data.ibm_is_region.region.name
     zone_name                     = data.ibm_is_zone.zone.name
     vpc_id                        = data.ibm_is_vpc.vpc.id
