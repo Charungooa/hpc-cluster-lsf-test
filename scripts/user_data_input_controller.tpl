@@ -23,6 +23,7 @@ imageID="${image_id}"
 subnetID="${subnet_id}"
 vpcID="${vpc_id}"
 securityGroupID="${security_group_id}"
+sshkey_id = split(",", local.ssh_key_id_list)
 sshkey_ID="${sshkey_id}"
 regionName="${region_name}"
 zoneName="${zone_name}"
