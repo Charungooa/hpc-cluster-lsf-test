@@ -124,7 +124,7 @@ data "template_file" "controller_user_data" {
     image_id                      = local.image_mapping_entry_found? local.new_image_id :data.ibm_is_image.image[0].id
     subnet_id                     = ibm_is_subnet.subnet.id
     security_group_id             = ibm_is_security_group.sg.id
-    sshkey_id                     = data.ibm_is_ssh_key.ssh_key[local.ssh_key_list[0]].id
+    sshkey_id                     = data.ibm_is_ssh_key.ssh_key[local.ssh_key_list_all].id
     region_name                   = data.ibm_is_region.region.name
     zone_name                     = data.ibm_is_zone.zone.name
     vpc_id                        = data.ibm_is_vpc.vpc.id
@@ -436,6 +436,7 @@ locals {
         : "" ) )
 
   ssh_key_list = split(",", var.ssh_key_name)
+  ssh_key_list_all = join(", ", local.ssh_key_list)
   ssh_key_id_list = [
     for name in local.ssh_key_list:
     data.ibm_is_ssh_key.ssh_key[name].id
